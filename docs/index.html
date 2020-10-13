@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body class="bg-light">
+    <div id="app">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info alert-dismissible fade show m-4 text-left" role="alert">
+                    Solo tienes que ir clicando los 10 números, si te acertas, aumentará el número de veces acertado
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 p-2 text-center row">
+            <div class="col-md-12">
+                <h1>{{ title }}</h1>
+                <div class="list-group list-group-horizontal">
+                    <number v-for="number in numbers" :number="number"
+                            :local-storage-key='localStorageKey'/>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-4 text-center" v-if="results">
+            <h1>
+                {{ resultTitle }}
+                <button class="btn btn-danger m-2" @click="deleteResult">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </h1>
+            <table class="table table-striped">
+                <thead class="bg-light">
+                    <tr>
+                        <th>Número</th>
+                        <th>Veces acertado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(number, i) in numbers">
+                        <td class="font-weight-bold">{{ number }}</td>
+                        <td>{{results[i+1] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+    <script src="main.js"></script>
+    <script src="components/Number.js"></script>
+    <script src="config.js"></script>
+</body>
+</html>
